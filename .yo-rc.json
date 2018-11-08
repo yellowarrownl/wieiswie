@@ -1,0 +1,11 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "isCreatingSolution": true,
+    "environment": "spo",
+    "version": "1.6.0",
+    "libraryName": "wie-is-wie",
+    "libraryId": "dd28fd6a-c931-43c2-8e85-00f1e7c153b3",
+    "packageManager": "npm",
+    "componentType": "webpart"
+  }
+}

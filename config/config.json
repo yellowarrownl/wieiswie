@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "wie-is-wie-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/wieIsWie/WieIsWieWebPart.js",
+          "manifest": "./src/webparts/wieIsWie/WieIsWieWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "WieIsWieWebPartStrings": "lib/webparts/wieIsWie/loc/{locale}.js"
+  }
+}

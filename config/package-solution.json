@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "wie-is-wie-client-side-solution",
+    "id": "dd28fd6a-c931-43c2-8e85-00f1e7c153b3",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true
+  },
+  "paths": {
+    "zippedPackage": "solution/wie-is-wie.sppkg"
+  }
+}
