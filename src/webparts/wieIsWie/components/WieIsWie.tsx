@@ -1,18 +1,17 @@
 import * as React from 'react';
-import styles from './WieIsWie.module.scss';
-import { IWieIsWieProps } from './IWieIsWieProps';
-import { escape } from '@microsoft/sp-lodash-subset';
 import { MSGraphClient } from '@microsoft/sp-http';
+import * as MicrosoftGraph from '@microsoft/microsoft-graph-types';
+import { UserTeamRole } from '@microsoft/teams-js';
 
 export interface IUserProps {
   graphClient: MSGraphClient;
 }
 
 export interface IUsersState {
-  users: any[];
+  users: MicrosoftGraph.User[];
 }
 
-export default class WieIsWie extends React.Component<IUserProps, {}> {
+export default class WieIsWie extends React.Component<IUserProps, IUsersState> {
   
   constructor(props: IUserProps) {
     super(props);
@@ -22,39 +21,24 @@ export default class WieIsWie extends React.Component<IUserProps, {}> {
     };
   }
 
-  public listData(): void {
-  this.context.msGraphClientFactory
-  .getClient()
-  .then((client: MSGraphClient): void => {
-    // get information about the current user from the Microsoft Graph
-    client
-      .api('/users')
-      .get((error, res: any, rawResponse?: any) => {
-        console.log(res);
-        // Passes the information to a constructor to set the state
-        const userList:any[] = res.value;
-        this.setState({users: userList});
-        });
-     });
-    }     
-  
-  public render(): React.ReactElement<IWieIsWieProps> {   
-
+  public componentDidMount(): void {
+    console.log("Hier roepen wij de functie Graph aan");
+    this.props.graphClient
+    .api('/users')
+    .get((error:any, res: any, rawResponse?: any) => {
+      console.log(res);
+      console.log(error);
+      // Passes the information to a constructor to set the state
+      const userList:MicrosoftGraph.User[] = res.value;
+      this.setState({users: userList});
+      console.log(this.state);
+    });
+  }
+    
+  public render(): React.ReactElement<IUserProps> {
+    console.log("Dit is een test");
     return (
-      <div className={ styles.wieIsWie }>
-        <div className={ styles.container }>
-          <div className={ styles.row }>
-            <div className={ styles.column }>
-              <span className={ styles.title }></span>
-              <p className={ styles.subTitle }></p>
-              <p className={ styles.description }></p>
-              <a href="https://aka.ms/spfx" className={ styles.button }>
-                <span className={ styles.label }>Learn more</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div><p>{this.state.users}</p></div>
     );
   }
 }

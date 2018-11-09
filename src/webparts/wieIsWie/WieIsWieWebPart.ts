@@ -13,25 +13,31 @@ import { IWieIsWieProps } from './components/IWieIsWieProps';
 import { IUserProps } from './components/WieIsWie';
 import { MSGraphClient } from '@microsoft/sp-http';
 
+
 export interface IWieIsWieWebPartProps {
   description: string;
 }
 
 export default class WieIsWieWebPart extends BaseClientSideWebPart<IWieIsWieWebPartProps> {
-  
-client: MSGraphClient;
 
   //Start off the site render
   public render(): void {
 
+let element: React.ReactElement<IUserProps>;
+
+    this.context.msGraphClientFactory
+      .getClient()
+      .then((msgraphclient:MSGraphClient): void =>{
+          ReactDom.render(React.createElement(
+          WieIsWie,
+          {
+          graphClient: msgraphclient
+         }
+        ), this.domElement);
+        
+      })
+
   //Rending public site
-    const element: React.ReactElement<IUserProps> = React.createElement(
-      WieIsWie,
-      {
-      graphClient: this.client 
-     }
-    );
-  
     ReactDom.render(element, this.domElement);
   } 
 
