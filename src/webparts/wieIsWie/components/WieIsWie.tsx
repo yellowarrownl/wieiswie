@@ -28,9 +28,10 @@ export default class WieIsWie extends React.Component<IUserProps, {}> {
   .then((client: MSGraphClient): void => {
     // get information about the current user from the Microsoft Graph
     client
-      .api('/me')
+      .api('/users')
       .get((error, res: any, rawResponse?: any) => {
         console.log(res);
+        // Passes the information to a constructor to set the state
         const userList:any[] = res.value;
         this.setState({users: userList});
         });
@@ -44,7 +45,7 @@ export default class WieIsWie extends React.Component<IUserProps, {}> {
         <div className={ styles.container }>
           <div className={ styles.row }>
             <div className={ styles.column }>
-              <span className={ styles.title }>Welcome to SharePoint!</span>
+              <span className={ styles.title }></span>
               <p className={ styles.subTitle }></p>
               <p className={ styles.description }></p>
               <a href="https://aka.ms/spfx" className={ styles.button }>
