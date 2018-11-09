@@ -22,8 +22,6 @@ export default class WieIsWie extends React.Component<IUserProps, IUsersState> {
       users: []
     };
   }
-
-
    
   public componentDidMount(): void { 
     this.props.graphClient
@@ -39,16 +37,11 @@ export default class WieIsWie extends React.Component<IUserProps, IUsersState> {
   }
 
   public render(): React.ReactElement<IUserProps> {
-    let fullList = this.state.users;
-    let cleanList = this.state.users;
-    let filterList = this.state.users;
-    console.log("filteredlist:", filterList);
-    console.log("filter over filter", filterList.filter((user)=> user.displayName == 'Chris Veneboer'))   
    /* this.state.users.filter(function(element, index, array){
       element.displayName = ""
     }) */
     console.log("Dit is een test");
-
+    console.log(this.state.users);
     return (
       <div>
 
@@ -60,13 +53,13 @@ export default class WieIsWie extends React.Component<IUserProps, IUsersState> {
         onClear={ev => {
           console.log('Custom onClear Called');
         }}
-        onChange={function(newValue){ filterList = cleanList.filter((user)=> user.displayName == newValue);}}
+        onChange={newValue => console.log('SearchBox onChange fired: ' + newValue)}
         onSearch={newValue => console.log('SearchBox onSearch fired: ' + newValue)}
         onFocus={() => console.log('onFocus called')}
         onBlur={() => console.log('onBlur called')}
       />
 
-      {filterList.map((user)=>
+      {this.state.users.map((user)=>
         <Persona 
           {...user} 
           imageUrl={'/_layouts/15/userphoto.aspx?accountname='+ user.mail +'&size=L'} 
@@ -77,6 +70,22 @@ export default class WieIsWie extends React.Component<IUserProps, IUsersState> {
       </div>
     );
   }
+
+  klikOpUser(event:any, naam:string): void{
+    console.log("Klik op " + naam );
+    var index = this.state.users.map(function(x) {return x.displayName; }).indexOf(naam);
+    this.state.users.splice(index,1);
+    console.log(index);
+    console.log(this.state.users);
+  }
+
+  klikOpFilter(event:any){
+    this.state.users.filter(function(user){
+      user.displayName == 'Chris Veneboer';
+    } )
+    console.log(this.state.users);
+  }
+
 }
 
 /*
