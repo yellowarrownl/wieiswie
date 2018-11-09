@@ -38,7 +38,7 @@ let element: React.ReactElement<IUserProps>;
       })
 
   //Rending public site
-    ReactDom.render(element, this.domElement);
+  //  ReactDom.render(element, this.domElement);
   } 
 
   protected onDispose(): void {
